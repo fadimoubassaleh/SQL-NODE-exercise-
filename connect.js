@@ -148,6 +148,18 @@ app.get('/delete/:id', (req, res) => {
     })
 })
 
+// path form to delete one movie from the list ===> http://localhost:3000/form/id
+app.get('/form', (req, res)=>{
+    const form= `
+    <form>
+        <input type="text" name="name" placeholder="name"/>
+        <input type="text" name="genre" placeholder="genre"/>
+        <input type="submit" value="ok"/>
+    </form>
+    `
+    res.send(form)
+})
+
 
 // Runnig the server 
 const port = 3000; // listing port

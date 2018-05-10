@@ -48,7 +48,7 @@ const mapAllTable = (callback) => {
         }
         let moviesHTML = '<ul>'
         rows.forEach((row) => {
-            moviesHTML += '<li>' + (row.id + '\t' + row.name + '\t' + row.genre) + '</li>'
+            moviesHTML += '<li>' + (row.id + '\t' + row.name + '\t' + row.genre) + '<a href="/delete/'+ row.id +'">delete</a> </li>'
             // console.log(row.id + '\t' + row.name + '\t' + row.genre)
             console.log(row)
         })
@@ -63,6 +63,7 @@ const mapAllTable = (callback) => {
         </head>
         <body>
             <div class="main">
+            <a href="/form">add new movie</a>
             `+ moviesHTML + `
             </div>
         </body>
@@ -144,7 +145,7 @@ app.get('/add', (req, res) => {
 app.get('/delete/:id', (req, res) => {
     const id = req.params.id
     deleteOne(id, function(results){
-        res.send(results)
+        res.redirect('/')
     })
 })
 

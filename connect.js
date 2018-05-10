@@ -140,7 +140,7 @@ app.get('/add', (req, res) => {
     })
 })
 
-// path DELETE to delete one movie from the list ===> http://localhost:3000/add?name=<NAME>&genre=<GENRE>
+// path DELETE to delete one movie from the list ===> http://localhost:3000/delete/id
 app.get('/delete/:id', (req, res) => {
     const id = req.params.id
     deleteOne(id, function(results){

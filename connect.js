@@ -57,7 +57,7 @@ const mapAllTable = () => {
 
 
 // close the database connection
-const shutdownDB = ()=>{
+const shutdownDB = () => {
     db.close((err) => {
         if (err) {
             return console.error(err.message);
@@ -65,3 +65,20 @@ const shutdownDB = ()=>{
         console.log('Close the database connection.');
     });
 }
+
+//               EXPRESS PART           /////////
+
+const express = require('express');
+const bodyParser = require('body-parser')
+const app = express();
+
+app.get('/', (req, res) => {
+    res.send('./index.html')
+})
+
+
+// Runnig the server 
+const port = 3000; // listing port
+app.listen(port, () => {
+    console.log('Listening on port: ' + port)
+})

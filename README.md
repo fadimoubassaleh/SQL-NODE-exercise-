@@ -28,6 +28,6 @@ return form you can insert new movie
 
 ### you can run also on terminal
 
-1- > ``` node connect.js --list ``` to see all movies on server console
+1- ```> node connect.js --list ``` to see all movies on server console
 
-2- > ``` node connect.js --add <NAME> <GENRE> ``` to add now movie to the DB 
+2- ```> node connect.js --add <NAME> <GENRE> ``` to add now movie to the DB 

@@ -31,12 +31,12 @@ const updateOne = () => {
 }
 
 // DELETE one of the elemnts from movies
-const deleteOne = () => {
-    db.run(`DELETE FROM movies WHERE id=?`, 7, function (err) {
+const deleteOne = (id, results) => {
+    db.run(`DELETE FROM movies WHERE id=?`, id, function (err) {
         if (err) {
-            return console.error(err.message)
+            return results(err.message)
         }
-        console.log(`DELETE is work`)
+        results(`you just delete movie with id: `+ id)
     })
 }
 
@@ -135,10 +135,19 @@ app.get('/add', (req, res) => {
     }else if (!genre){
         res.send('genre is required')
     }
-    insertOne(name, genre, function(message){
-        res.send(message)
+    insertOne(name, genre, function(results){
+        res.send(results)
     })
 })
+
+// path DELETE to delete one movie from the list ===> http://localhost:3000/add?name=<NAME>&genre=<GENRE>
+app.get('/delete/:id', (req, res) => {
+    const id = req.params.id
+    deleteOne(id, function(results){
+        res.send(results)
+    })
+})
+
 
 // Runnig the server 
 const port = 3000; // listing port

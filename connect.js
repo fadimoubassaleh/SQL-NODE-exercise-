@@ -9,8 +9,9 @@ let db = new sqlite3.Database('mydatabase.db', sqlite3.OPEN_READWRITE, (err) => 
 });
 
 // INSERT (add) one element to movies
-const insertOne = () => {
-    db.run('INSERT INTO movies(id, name, genre) VALUES(7, "newname", "newgenre")', function (err) {
+const insertOne = (name, genre) => {
+    console.log(name + " " + genre)
+    db.run(`INSERT INTO movies(name, genre) VALUES(?, ?)`, [name, genre], function (err) {
         if (err) {
             return console.log(err.message);
         }
@@ -66,19 +67,57 @@ const shutdownDB = () => {
     });
 }
 
+
+// runnig part
+
+const args = process.argv.slice(2)
+const command = args[0]
+if (command === "--add") {
+    const name = args[1]
+    const genre = args[2]
+    if (!name) {
+        console.log('you have to provide a name')
+        process.exit()
+    } else if (!genre) {
+        console.log('you have to provide a gemre')
+        process.exit()
+    } else {
+        insertOne(name, genre)
+    }
+}else if (command === "--list"){
+    mapAllTable()
+}
+shutdownDB()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //               EXPRESS PART           /////////
 
-const express = require('express');
-const bodyParser = require('body-parser')
-const app = express();
+// const express = require('express');
+// const bodyParser = require('body-parser')
+// const app = express();
 
-app.get('/', (req, res) => {
-    res.send('./index.html')
-})
+// app.get('/', (req, res) => {
+//     res.send('./index.html')
+// })
 
 
-// Runnig the server 
-const port = 3000; // listing port
-app.listen(port, () => {
-    console.log('Listening on port: ' + port)
-})
+// // Runnig the server 
+// const port = 3000; // listing port
+// app.listen(port, () => {
+//     console.log('Listening on port: ' + port)
+// })

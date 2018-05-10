@@ -20,11 +20,14 @@ return form you can insert new movie
 ### how to use it
 
 1- clone it form repo
+
 2- npm install
+
 3- run >> ``` nodemon connect.js ``` >> localhost:3000
 
 
 ### you can run also on terminal
 
 1- > ``` node connect.js --list ``` to see all movies on server console
-1- > ``` node connect.js --add <NAME> <GENRE> ``` to add now movie to the DB 
+
+2- > ``` node connect.js --add <NAME> <GENRE> ``` to add now movie to the DB 

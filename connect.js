@@ -136,7 +136,7 @@ app.get('/add', (req, res) => {
         res.send('genre is required')
     }
     insertOne(name, genre, function(results){
-        res.send(results)
+        res.redirect('/')
     })
 })
 
@@ -151,7 +151,7 @@ app.get('/delete/:id', (req, res) => {
 // path form to delete one movie from the list ===> http://localhost:3000/form/id
 app.get('/form', (req, res)=>{
     const form= `
-    <form>
+    <form action="/add" >
         <input type="text" name="name" placeholder="name"/>
         <input type="text" name="genre" placeholder="genre"/>
         <input type="submit" value="ok"/>

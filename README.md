@@ -8,11 +8,13 @@ all the idea about moives saved on database SQLite colled 'mydatabase' with [id,
 
 ```
 localhost:3000
-``` return home page with movies list
+``` 
+return home page with movies list
 ```
 localhost:3000/add
-``` return form you can insert new movie 
-```
+``` 
+return form you can insert new movie 
+
  
 
 ### how to use it

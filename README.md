@@ -22,7 +22,7 @@ return form you can insert new movie
 1- clone it form repo
 2- npm install
 3- run >> ``` nodemon connect.js ``` >> localhost:3000
----
+
 
 ### you can run also on terminal
 

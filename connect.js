@@ -19,9 +19,9 @@ const insertOne = (name, genre, results) => {
 }
 
 // UPDATE one the elemnts from movies
-const updateOne = () => {
+const updateOne = (name, id) => {
     let sql = `UPDATE movies SET name=? WHERE id=?`
-    let data = ['hello my friends', 6];
+    let data = [name, id];
     db.run(sql, data, function (err) {
         if (err) {
             return console.error(err.message);
@@ -48,7 +48,7 @@ const mapAllTable = (callback) => {
         }
         let moviesHTML = '<ul>'
         rows.forEach((row) => {
-            moviesHTML += '<li>' + (row.id + '\t' + row.name + '\t' + row.genre) + '<a href="/delete/'+ row.id +'">delete</a> </li>'
+            moviesHTML += '<li>' + (row.id + '\t' + row.name + '\t' + row.genre) + '<a href="/delete/'+ row.id +'">delete</a> <a href="/movie/'+ row.id +'">update<a/> </li>'
             // console.log(row.id + '\t' + row.name + '\t' + row.genre)
             console.log(row)
         })
@@ -153,13 +153,46 @@ app.get('/delete/:id', (req, res) => {
 app.get('/form', (req, res)=>{
     const form= `
     <form action="/add" >
-        <input type="text" name="name" placeholder="name"/>
-        <input type="text" name="genre" placeholder="genre"/>
-        <input type="submit" value="ok"/>
+    <input type="text" name="name" placeholder="name"/>
+    <input type="text" name="genre" placeholder="genre"/>
+    <input type="submit" value="ok"/>
     </form>
     `
     res.send(form)
 })
+
+// path movie to update one movie from the list ===> http://localhost:3000/movie/id
+app.get('/movie/:id', (req, res)=>{
+    const id = req.params.id
+    db.get('SELECT * FROM movies WHERE id=?', id, (err, movie)=>{
+        if(err){
+            res.send(err)
+        }
+        if(!movie){
+            return res.send("movie not found")
+        }
+        const form= `
+        <form action="/update/`+ id +`" >
+        <input type="text" name="name" value="`+ movie.name +`"/>
+        <input type="text" name="genre" value="`+ movie.genre +`"/>
+        <input type="submit" value="update"/>
+        </form>
+        `
+        res.send(form)
+    })
+})
+
+// path update to update one movie from the list ===> http://localhost:3000/update/id
+app.get('/update/:id', (req, res)=>{
+    const id = req.params.id
+    const name = req.query.name
+    updateOne(name, id, function(){
+    })
+    res.redirect('/')
+
+})
+
+
 
 
 // Runnig the server 

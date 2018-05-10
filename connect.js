@@ -65,8 +65,3 @@ const shutdownDB = ()=>{
         console.log('Close the database connection.');
     });
 }
-
-insertOne();
-updateOne();
-deleteOne();
-shutdownDB();
